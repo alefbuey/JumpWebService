@@ -1,7 +1,8 @@
 <?php
 
-require_once '/var/www/html/JumpWebService/Config/conf.php';
-require Conf::getRootDir().'/Data/Entity.php';
+//require_once '/var/www/html/JumpWebService/Config/conf.php';
+require_once '/srv/http/JumpWebService/Config/conf.php';
+require_once Conf::getRootDir().'Data/Entity.php';
 
 class UserJump extends Entity
 {   
@@ -23,8 +24,8 @@ class UserJump extends Entity
     private static $availablemoney;
 
 
-    static protected $object ='UserJump';
-    static protected $primary='email';
+    static protected $tableName ='UserJump';
+    static protected $primaryKey='email';
     
         //getter
     public function get($attribut) {
@@ -159,6 +160,6 @@ class UserJump extends Entity
 //        return $sentencia->execute(array($idMeta));
 //    }
 }
-echo '<pre>', print_r(UserJump), '</pre>';
+//echo '<pre>', print_r(UserJump), '</pre>';
 
 ?>
