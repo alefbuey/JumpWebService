@@ -1,16 +1,15 @@
 <?php
-require_once '/var/www/html/JumpWebService/Config/conf.php';
+//require_once '/var/www/html/JumpWebService/Config/conf.php';
+require_once '/srv/http/JumpWebService/Config/conf.php';
 require Conf::getRootDir().'/Data/DataUser/UserJump.php';
 
-echo 'Estoy fuera';
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-    
+   
+//PAra hacerlo con POST    
 //    $post = json_decode(file_get_contents("php://input"), true);
 //    echo '<pre>',$post['email'],'</pre>';
-    echo 'Estoy en el primer if';
-    if (isset($_GET['email']) and isset($_GET['password'])) {
-        
-            echo 'Estoy en el segundo if';
+
+    if (isset($_GET['email']) and isset($_GET['password'])) {     
 
         // Obtener par�metro idMeta
         $email = $_GET['email'];
@@ -18,29 +17,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         
         // Tratar retorno
         $retorno = UserJump::select($email);
-        
-        
-//        echo print_r($retorno->get('password'));
-//        
-//        echo "\n";
-        echo '<pre>',print_r($retorno),'</pre>';       
-//        echo "\n";
-//        try{
-//         echo '<pre>',$email,'</pre>';
-//         echo '<pre>',$password,'</pre>';
-//         echo $retorno->checkPassword($email,$password)? 'true' : 'false';          // ? 'true' : 'false'
-//        } catch (Exception $ex) {
-//            echo $ex->getMessage();
-//        }
-//        echo print_r($retorno->hola());
+     
+//        echo '<pre>',print_r($retorno),'</pre>';       
+
        
         if ($retorno) {
                 
                 if($retorno->checkPassword($email,$password)){
                     $user["estado"] = "1";
-                    $user["user"] = $retorno;
-                    // Enviar objeto json de la meta
-                    echo '<pre>',print_r($retorno),'</pre>';     
+                    $user["user"] = $retorno;                 
                     echo json_encode($user);                    
                 } else {
                     echo json_encode(
