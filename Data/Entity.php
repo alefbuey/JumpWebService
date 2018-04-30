@@ -1,7 +1,6 @@
 <?php
 
-require_once '/var/www/html/JumpWebService1/Config/conf.php';
-
+require_once '/var/www/html/JumpWebService/Config/conf.php';
 
 
 class Entity{
@@ -49,35 +48,38 @@ class Entity{
         $table_name=static::$tableName;
         $class_name=ucfirst($table_name);
         $primary_key=static::$primaryKey;
-        $sql = "SELECT * from job WHERE id=1";
+  
+        $sql = "SELECT * from $table_name WHERE $primary_key=:primary_v";
+        
+        $req_prep=Entity::$pdo->prepare($sql);
+        
         $values = array(
-                "primary_v" => $primary_value,
+                "primary_v" => $primary_value
         );
         try{
-            
-            $req_prep=Entity::$pdo->query($sql);
+            $req_prep->execute($values);
+           
                
         } catch (PDOException $e) {
                 if (Conf::getDebug()) {
-                echo $e->getMessage(); // affiche un message d'erreur
+                echo $e->getMessage(); // show an error message
                 } else {
-                       echo 'Une erreur est survenue <a href="./index.php"> retour a la page d\'accueil </a>';
+                       echo 'Connection error';
                 }
                 die();
-        }
+        }        
         
         $req_prep->setFetchMode(PDO::FETCH_CLASS, $class_name);
+        $res = $req_prep->fetch();
         
-        
-        
-        $tab = $req_prep->fetch();
-        // Attention, si il n'y a pas de résultats, on renvoie false
-        //if (empty($tab))
-        //        return true;
-        return $tab;
+        if (empty($res)){
+            return false;
+        }
+        return $res;
     }
        
-	
+    
+    
  /*
 	public static function delete($primary){
 		$table_name=static::$object;

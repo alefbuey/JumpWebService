@@ -10,7 +10,7 @@ class Conf{
 	);
         
         
-        static private $rootDir = '/var/www/html/JumpWebService1/';
+        static private $rootDir = '/var/www/html/JumpWebService/';
 
 	static private $debug = true;
 

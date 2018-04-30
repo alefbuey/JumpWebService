@@ -1,10 +1,9 @@
 <?php
-require_once '/var/www/html/JumpWebService1/Config/conf.php';
+require_once '/var/www/html/JumpWebService/Config/conf.php';
 require_once Conf::getRootDir().'Data/Entity.php';
 class Job extends Entity{
    
     private static $id;
-     
     private static $idemployer;
     private static $mode;
     private static $state;
@@ -47,16 +46,16 @@ class Job extends Entity{
 
     
     //getter
-    public function get($attribut) {
-            if (property_exists($this, $attribut)) {
-                    return $this->$attribut;
+    public function get($attribute) {
+            if (property_exists($this, $attribute)) {
+                    return $this->$attribute;
             }
     }
 
     //setter
-            public function set($attribut,$valeur) {
-                    if (property_exists($this, $attribut)) {
-                            $this->$attribut=$valeur;
+            public function set($attribute,$value) {
+                    if (property_exists($this, $attribute)) {
+                            $this->$attribute=$value;
              }
     }   
 
