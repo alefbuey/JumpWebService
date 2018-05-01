@@ -115,31 +115,6 @@ class Entity{
 		return true;
 	}
         
-        public static function updvate($totalData){
-                $data = $totalData['newData'];
-                $id = $totalData['id'];
-		$table_name=static::$tableName;
-		$primary_key=static::$primaryKey;
-		$sql= "UPDATE $table_name SET";
-		foreach ($data as $cle => $value){
-			$sql .=" $cle=:$cle,";
-		}
-		$sql=rtrim($sql,",");
-		$sql.=" WHERE $primary_key=:primary_v";
-		$req_prep=Entity::$pdo->prepare($sql);
-                $data['primary_v'] = $id; 
-		try{
-			$req_prep->execute($data);
-		} catch (PDOException $e) {
-			if (Conf::getDebug()) {
-				echo $e->getMessage(); 
-			} else {
-				echo 'Connection error';
-			}
-			return false;
-		}
-		return true;
-	}
 
 	public static function update($data){
 		$table_name=static::$tableName;
