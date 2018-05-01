@@ -11,7 +11,9 @@ and open the template in the editor.
     </head>
     <body>
         <?php
+
         echo "Servicio Web JUMP";
+
         ?>
     </body>
 </html>
