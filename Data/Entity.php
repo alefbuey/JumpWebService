@@ -1,7 +1,7 @@
 <?php
 
-//require_once '/var/www/html/JumpWebService/Config/conf.php';
-require_once '/srv/http/JumpWebService/Config/conf.php';
+require_once '/var/www/html/JumpWebService/Config/conf.php';
+//require_once '/srv/http/JumpWebService/Config/conf.php';
 
 class Entity{
 	public static $pdo;
@@ -48,30 +48,21 @@ class Entity{
         $table_name=static::$tableName;
         $class_name=ucfirst($table_name);
         $primary_key=static::$primaryKey;
-  
-        $sql = "SELECT * from $table_name WHERE $primary_key=:primary_v";
-        
+        $sql = "SELECT * FROM $table_name WHERE $primary_key=:primary_v";
         $req_prep=Entity::$pdo->prepare($sql);
-        
-        $values = array(
-                "primary_v" => $primary_value
-        );
+        $values = array("primary_v" => $primary_value);
         try{
             $req_prep->execute($values);
-           
-               
         } catch (PDOException $e) {
                 if (Conf::getDebug()) {
-                echo $e->getMessage(); // show an error message
+                    echo $e->getMessage(); // show an error message
                 } else {
                        echo 'Connection error';
                 }
                 die();
         }        
-        
         $req_prep->setFetchMode(PDO::FETCH_CLASS, $class_name);
         $res = $req_prep->fetch();
-        
         if (empty($res)){
             return false;
         }
@@ -80,31 +71,29 @@ class Entity{
        
     
     
- /*
-	public static function delete($primary){
-		$table_name=static::$object;
-		$primary_key=static::$primary;
+ 
+	public static function delete($primary_value){
+		$table_name=static::$tableName;
+		$primary_key=static::$primaryKey;
 		$sql= "DELETE FROM $table_name WHERE $primary_key=:primary_v";
-		$req_prep=Model::$pdo->prepare($sql);
-		$values = array(
-			"primary_v" => $primary,
-		);
+		$req_prep=Entity::$pdo->prepare($sql);
+		$values = array("primary_v" => $primary_value);
 		try{
-			$req_prep->execute($values);
+                    $req_prep->execute($values);
 		} catch (PDOException $e) {
-			if (Conf::getDebug()) {
-				echo $e->getMessage(); // affiche un message d'erreur
-			} else {
-				echo 'Une erreur est survenue <a href="./index.php"> retour a la page d\'accueil </a>';
-			}
-			return false;
+                    if (Conf::getDebug()) {
+                            echo $e->getMessage();
+                    } else {
+                            echo 'Connection error';
+                    }
+                    return false;
 		}
 		return true;
 	}
 
 	public static function save($data){
-		$table_name=static::$object;
-		$sql= "INSERT INTO $table_name(";
+		$table_name=static::$tableName;
+		$sql= "INSERT INTO $table_name (";
 		foreach ($data as $cle => $valeur){
 			$sql .=" $cle,";
 		}
@@ -114,12 +103,38 @@ class Entity{
 			$sql .=" :$cle,";
 		}
 		$sql=rtrim($sql,",").")";
-		$req_prep=Model::$pdo->prepare($sql);
+		$req_prep=Entity::$pdo->prepare($sql);
 		try{
 			$req_prep->execute($data);
 		} catch (PDOException $e) {
 			if (Conf::getDebug()) {
-				echo $e->getMessage(); // affiche un message d'erreur
+				echo $e->getMessage();
+			}
+			return false;
+		}
+		return true;
+	}
+        
+        public static function updvate($totalData){
+                $data = $totalData['newData'];
+                $id = $totalData['id'];
+		$table_name=static::$tableName;
+		$primary_key=static::$primaryKey;
+		$sql= "UPDATE $table_name SET";
+		foreach ($data as $cle => $value){
+			$sql .=" $cle=:$cle,";
+		}
+		$sql=rtrim($sql,",");
+		$sql.=" WHERE $primary_key=:primary_v";
+		$req_prep=Entity::$pdo->prepare($sql);
+                $data['primary_v'] = $id; 
+		try{
+			$req_prep->execute($data);
+		} catch (PDOException $e) {
+			if (Conf::getDebug()) {
+				echo $e->getMessage(); 
+			} else {
+				echo 'Connection error';
 			}
 			return false;
 		}
@@ -127,22 +142,23 @@ class Entity{
 	}
 
 	public static function update($data){
-		$table_name=static::$object;
-		$primary_key=static::$primary;
+		$table_name=static::$tableName;
+		$primary_key=static::$primaryKey;
 		$sql= "UPDATE $table_name SET";
-		foreach ($data as $cle => $valeur){
+		foreach ($data as $cle => $value){
 			$sql .=" $cle=:$cle,";
 		}
 		$sql=rtrim($sql,",");
 		$sql.=" WHERE $primary_key=:$primary_key";
-		$req_prep=Model::$pdo->prepare($sql);
+                
+		$req_prep= Entity::$pdo->prepare($sql);
 		try{
 			$req_prep->execute($data);
 		} catch (PDOException $e) {
 			if (Conf::getDebug()) {
 				echo $e->getMessage(); // affiche un message d'erreur
 			} else {
-				echo 'Une erreur est survenue <a href="./index.php"> retour a la page d\'accueil </a>';
+				echo 'Connection error';
 			}
 			return false;
 		}
@@ -162,9 +178,7 @@ class Entity{
 			$this->$attribut=$valeur;
 	 	}
 	}
-         * 
-         * 8
-         */
+        
 
 }
 Entity::Init();

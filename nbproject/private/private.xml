@@ -3,7 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/var/www/html/JumpWebService/index.php</file>
             <file>file:/var/www/html/JumpWebService/Config/conf.php</file>
+            <file>file:/var/www/html/JumpWebService/Logic/Work/jobRead.php</file>
+            <file>file:/var/www/html/JumpWebService/Data/DataWork/Job.php</file>
+            <file>file:/var/www/html/JumpWebService/Logic/Work/jobDelete.php</file>
+            <file>file:/var/www/html/JumpWebService/Logic/Work/jobUpdate.php</file>
+            <file>file:/var/www/html/JumpWebService/Logic/Work/jobCreate.php</file>
             <file>file:/var/www/html/JumpWebService/Data/Entity.php</file>
         </group>
     </open-files>

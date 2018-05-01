@@ -1,6 +1,6 @@
 <?php
-//require_once '/var/www/html/JumpWebService/Config/conf.php';
-require_once '/srv/http/JumpWebService/Config/conf.php';
+require_once '/var/www/html/JumpWebService/Config/conf.php';
+//require_once '/srv/http/JumpWebService/Config/conf.php';
 require_once Conf::getRootDir().'Data/Entity.php';
 class Job extends Entity{
    
@@ -46,19 +46,6 @@ class Job extends Entity{
     }
 
     
-    //getter
-    public function get($attribute) {
-            if (property_exists($this, $attribute)) {
-                    return $this->$attribute;
-            }
-    }
-
-    //setter
-            public function set($attribute,$value) {
-                    if (property_exists($this, $attribute)) {
-                            $this->$attribute=$value;
-             }
-    }   
 
 }
 
