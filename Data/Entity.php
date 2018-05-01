@@ -41,9 +41,7 @@ class Entity{
 		return $rep->fetchAll();
 	}
 */
-        
-        
-        
+    
     public static function select($primary_value){
         $table_name=static::$tableName;
         $class_name=ucfirst($table_name);
@@ -77,30 +75,27 @@ class Entity{
         }
         return $res;
     }
-       
-    
-    
-
-//	public static function delete($primary){
-//		$table_name=static::$object;
-//		$primary_key=static::$primary;
-//		$sql= "DELETE FROM $table_name WHERE $primary_key=:primary_v";
-//		$req_prep=Model::$pdo->prepare($sql);
-//		$values = array(
-//			"primary_v" => $primary,
-//		);
-//		try{
-//			$req_prep->execute($values);
-//		} catch (PDOException $e) {
-//			if (Conf::getDebug()) {
-//				echo $e->getMessage(); // affiche un message d'erreur
-//			} else {
-//				echo 'Une erreur est survenue <a href="./index.php"> retour a la page d\'accueil </a>';
-//			}
-//			return false;
-//		}
-//		return true;
-//	}
+ 
+	public static function delete($primary){
+		$table_name=static::$tableName;
+		$primary_key=static::$primaryKey;
+		$sql= "DELETE FROM $table_name WHERE $primary_key=:primary_v";
+		$req_prep=Entity::$pdo->prepare($sql);
+		$values = array(
+			"primary_v" => $primary
+		);
+		try{
+			$req_prep->execute($values);
+		} catch (PDOException $e) {
+			if (Conf::getDebug()) {
+				echo $e->getMessage(); // affiche un message d'erreur
+			} else {
+				echo 'Une erreur est survenue <a href="./index.php"> retour a la page d\'accueil </a>';
+			}
+			return false;
+		}
+		return true;
+	}
 //
 	public static function save($data){
 		$table_name=static::$tableName;
@@ -126,29 +121,30 @@ class Entity{
 		}
 		return true;
 	}
-//
-//	public static function update($data){
-//		$table_name=static::$object;
-//		$primary_key=static::$primary;
-//		$sql= "UPDATE $table_name SET";
-//		foreach ($data as $cle => $valeur){
-//			$sql .=" $cle=:$cle,";
-//		}
-//		$sql=rtrim($sql,",");
-//		$sql.=" WHERE $primary_key=:$primary_key";
-//		$req_prep=Model::$pdo->prepare($sql);
-//		try{
-//			$req_prep->execute($data);
-//		} catch (PDOException $e) {
-//			if (Conf::getDebug()) {
-//				echo $e->getMessage(); // affiche un message d'erreur
-//			} else {
-//				echo 'Une erreur est survenue <a href="./index.php"> retour a la page d\'accueil </a>';
-//			}
-//			return false;
-//		}
-//		return true;
-//	}
+
+	public static function update($data){
+		$table_name=static::$tableName;
+		$primary_key=static::$primaryKey;
+		$sql= "UPDATE $table_name SET";
+		foreach ($data as $cle => $valeur){
+			$sql .=" $cle=:$cle,";
+		}
+		$sql=rtrim($sql,",");
+		$sql.=" WHERE $primary_key=:$primary_key";
+                
+		$req_prep= Entity::$pdo->prepare($sql);
+		try{
+			$req_prep->execute($data);
+		} catch (PDOException $e) {
+			if (Conf::getDebug()) {
+				echo $e->getMessage(); // affiche un message d'erreur
+			} else {
+				echo 'Une erreur est survenue <a href="./index.php"> retour a la page d\'accueil </a>';
+			}
+			return false;
+		}
+		return true;
+	}
 //
 //	//getter
 //	public function get($attribut) {
