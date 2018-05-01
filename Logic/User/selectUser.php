@@ -11,15 +11,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
     if (isset($_GET['email']) and isset($_GET['password'])) {     
 
-        // Obtener par�metro idMeta
+        // Obtener parametro email y password
         $email = $_GET['email'];
         $password = $_GET['password'];
         
         // Tratar retorno
         $retorno = UserJump::select($email);
-     
-//        echo '<pre>',print_r($retorno),'</pre>';       
-
+   
        
         if ($retorno) {
                 

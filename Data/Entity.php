@@ -41,9 +41,7 @@ class Entity{
 		return $rep->fetchAll();
 	}
 */
-        
-        
-        
+    
     public static function select($primary_value){
         $table_name=static::$tableName;
         $class_name=ucfirst($table_name);
@@ -68,16 +66,15 @@ class Entity{
         }
         return $res;
     }
-       
-    
-    
- 
+
 	public static function delete($primary_value){
+
 		$table_name=static::$tableName;
 		$primary_key=static::$primaryKey;
 		$sql= "DELETE FROM $table_name WHERE $primary_key=:primary_v";
 		$req_prep=Entity::$pdo->prepare($sql);
 		$values = array("primary_v" => $primary_value);
+
 		try{
                     $req_prep->execute($values);
 		} catch (PDOException $e) {
@@ -90,19 +87,22 @@ class Entity{
 		}
 		return true;
 	}
-
+//
 	public static function save($data){
 		$table_name=static::$tableName;
-		$sql= "INSERT INTO $table_name (";
-		foreach ($data as $cle => $valeur){
-			$sql .=" $cle,";
+
+		$sql= "INSERT INTO $table_name(";
+		foreach ($data as $clave => $valor){
+			$sql .=" $clave,";
+
 		}
 		$sql=rtrim($sql,",").")";
 		$sql.=" VALUES (";
-		foreach ($data as $cle => $valeur){
-			$sql .=" :$cle,";
+		foreach ($data as $clave => $valor){
+			$sql .=" :$clave,";
 		}
 		$sql=rtrim($sql,",").")";
+
 		$req_prep=Entity::$pdo->prepare($sql);
 		try{
 			$req_prep->execute($data);
@@ -140,6 +140,7 @@ class Entity{
 		return true;
 	}
 
+
 	//getter
 	public function get($attribut) {
 		if (property_exists($this, $attribut)) {
@@ -153,6 +154,7 @@ class Entity{
 			$this->$attribut=$valeur;
 	 	}
 	}
+
         
 
 }
