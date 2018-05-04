@@ -13,11 +13,11 @@ class Conf{
 		'hostname' => 'localhost',
 		'database' => 'Jump',
 		'login' => 'postgres',
-		'password' => 'sasuke1996'
+		'password' => '1234'
 	);
         
-        
-        static private $rootDir = '/srv/http/JumpWebService/';
+        static private $rootDir = '/var/www/html/JumpWebService/';
+        //static private $rootDir = '/srv/http/JumpWebService/';
 
 	static private $debug = true;
 

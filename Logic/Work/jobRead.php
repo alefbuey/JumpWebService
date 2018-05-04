@@ -2,9 +2,13 @@
 require_once '/var/www/html/JumpWebService/Config/conf.php';
 require_once Conf::getRootDir().'Data/DataWork/Job.php';
 
-$idJob = $_GET['id'];
+if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
-$job = Job::select($idJob);
+    $idJob = $_GET['id'];
 
-echo json_encode($job);
+    $job = Job::select($idJob);
 
+    echo json_encode($job);
+
+
+}
