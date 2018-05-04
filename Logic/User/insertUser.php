@@ -12,7 +12,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     //name, lastname, birthdate, gender, email, password
     //el resto configurar a null en la base de datos
 
-    $data['nonce'] = 'T7Y8J' ; //sustituir con $body['nonce'] = UserJump::getnonce();
+    $data['nonce'] = UserJump::getnonce($data['email']);
 
     //La mayoria de los valores son no nulos asi que debo considerar eso para hacer un insert
     //insert con curl 
@@ -26,14 +26,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         print json_encode(
             array(
                 'estado' => '1',
-                'mensaje' => 'Creacion exitosa')
+                'mensaje' => 'Successful Creation')
         );
     } else {
         // Código de falla
         print json_encode(
             array(
                 'estado' => '2',
-                'mensaje' => 'Creacion fallida')
+                'mensaje' => 'Failed Creation')
         );
     }
 }
