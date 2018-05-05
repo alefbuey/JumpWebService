@@ -49,7 +49,10 @@ class UserJump extends Entity
             }
     }
     
-    //getNonce(){}
+    public function getNonce($message){        
+    $nonce = hash('sha512', $message);
+    return $nonce;
+    }
     //verifyNonce($data,$cnonce,$hash){}
     
     ///constructeur
