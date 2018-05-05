@@ -45,8 +45,21 @@ class Job extends Entity{
         }
     }
 
-    
+//getter
+	public function get($attribut) {
+		if (property_exists($this, $attribut)) {
+			return $this->$attribut;
+		}
+	}
 
+	//setter
+	public function set($attribut,$valeur) {
+		if (property_exists($this, $attribut)) {
+			$this->$attribut=$valeur;
+	 	}
+	}
+    
+    
 }
 
     
