@@ -66,6 +66,43 @@ class Entity{
         }
         return $res;
     }
+    
+    
+    public static function selectFields($primary_value, $fields){
+        $table_name=static::$tableName;
+        $class_name=ucfirst($table_name);
+        $primary_key=static::$primaryKey;
+        $sql = "SELECT";
+        foreach ($fields as $field){
+            $sql.= " $field,";
+        }
+        
+        $sql=rtrim($sql,",");
+        
+                  
+        $sql.= " FROM $table_name WHERE $primary_key=:primary_v";
+         
+        $req_prep=Entity::$pdo->prepare($sql);
+        $values = array("primary_v" => $primary_value);
+        try{
+            $req_prep->execute($values);
+        } catch (PDOException $e) {
+                if (Conf::getDebug()) {
+                    echo $e->getMessage(); // show an error message
+                } else {
+                       echo 'Connection error';
+                }
+                die();
+        }        
+        $req_prep->setFetchMode(PDO::FETCH_CLASS, $class_name);
+        $res = $req_prep->fetch();
+        if (empty($res)){
+            return false;
+        }
+        return $res;
+    }
+    
+    
 
 	public static function delete($primary_value){
 
@@ -140,6 +177,30 @@ class Entity{
 		return true;
 	}
 
+        
+        public static function getId($fieldName, $fieldValue){
+        $table_name=static::$tableName;
+        $sql = "SELECT id FROM $table_name WHERE $fieldName=:field_v";
+        $req_prep=Entity::$pdo->prepare($sql);
+        $values = array("field_v" => $fieldValue);
+        try{
+            $req_prep->execute($values);
+        } catch (PDOException $e) {
+                if (Conf::getDebug()) {
+                    echo $e->getMessage(); // show an error message
+                } else {
+                       echo 'Connection error';
+                }
+                die();
+        }        
+        $req_prep->setFetchMode(PDO::FETCH_ASSOC);
+        $res = $req_prep->fetch();
+        if (empty($res)){
+            return false;
+        }
+        return $res;
+    }
+        
 
 	//getter
 	public function get($attribut) {

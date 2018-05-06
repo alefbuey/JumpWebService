@@ -16,7 +16,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         $password = $_GET['password'];
         
         // Tratar retorno
-        $retorno = UserJump::select($email);
+        $idUser = UserJump::getId('email', $email);
+        $retorno = UserJump::select($idUser);
    
        
         if ($retorno) {

@@ -7,13 +7,13 @@ require_once Conf::getRootDir().'Data/Entity.php';
 class UserJump extends Entity
 {   
 
+    private static $id;
     private static $email;
     private static $password;
     private static $name;
     private static $lastname;
     private static $birthdate;
     private static $nonce;
-    private static $id;
     private static $idlocation;
     private static $idstate;
     private static $typenationalidentifier;
@@ -25,7 +25,7 @@ class UserJump extends Entity
 
 
     static protected $tableName ='UserJump';
-    static protected $primaryKey='email';
+    static protected $primaryKey='id';
     
         //getter
     public function get($attribut) {
@@ -42,6 +42,7 @@ class UserJump extends Entity
     }
     
     public function checkPassword($email,$password){
+        
             if(!$this==false && ($this->email)==$email && ($this->password)==$password){
                     return true;
             }else{
