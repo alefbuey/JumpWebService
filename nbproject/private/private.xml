@@ -5,6 +5,8 @@
         <group>
             <file>file:/var/www/html/JumpWebService/Logic/Work/jobRead.php</file>
             <file>file:/var/www/html/JumpWebService/Data/DataWork/Job.php</file>
+            <file>file:/var/www/html/JumpWebService/Data/DataUser/UserStaff.php</file>
+            <file>file:/var/www/html/JumpWebService/Data/DataUser/UserJump.php</file>
         </group>
     </open-files>
 </project-private>
