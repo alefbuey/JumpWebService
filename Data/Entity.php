@@ -23,7 +23,7 @@ class Entity{
 			die();
 		}
 	}
-	/*
+	
 	public static function selectAll(){
 		$table_name=static::$tableName;
 		$class_name=ucfirst($table_name);
@@ -40,7 +40,7 @@ class Entity{
 		$rep->setFetchMode(PDO::FETCH_CLASS, $class_name);
 		return $rep->fetchAll();
 	}
-*/
+
     
     public static function select($primary_value){
         $table_name=static::$tableName;

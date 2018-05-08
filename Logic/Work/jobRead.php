@@ -9,17 +9,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
     $idJob = $_GET['id'];
     
+    
     $job = Job::select($idJob);
     
     $user = UserJump::selectFields($job->get('idemployer'), array("id", "name", "lastname"));
+    
   
-    $userStaff = UserStaff::selectFields($job->get('idemployer'),array("image"));
+    $userStaff = UserStaff::selectFields($job->get('idemployer'),array("photopath"));
     
-    $image = stream_get_contents($userStaff->get("image"));
     
-    $image64 = base64_encode($image);
-    
-    $finalData = array("dataJob" => $job, "dataUser" => $user, "imageProfile" => $image64);
+    $finalData = array("dataJob" => $job, "dataUser" => $user, "dataUserStaff" => $userStaff);
     
     echo json_encode($finalData);
     
