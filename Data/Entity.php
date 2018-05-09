@@ -23,7 +23,7 @@ class Entity{
 			die();
 		}
 	}
-	/*
+
 	public static function selectAll(){
 		$table_name=static::$tableName;
 		$class_name=ucfirst($table_name);
@@ -31,7 +31,7 @@ class Entity{
 			$rep=Entity::$pdo->query("SELECT * FROM $table_name");
 		} catch (PDOException $e) {
 			if (Conf::getDebug()) {
-			echo $e->getMessage(); 
+			echo $e->getMessage();
 			} else {
 			echo 'Connection error';
 			}
@@ -40,8 +40,26 @@ class Entity{
 		$rep->setFetchMode(PDO::FETCH_CLASS, $class_name);
 		return $rep->fetchAll();
 	}
-*/
-    
+
+	public static function selectWithLimit($limit){
+		$table_name=static::$tableName;
+		$sql="SELECT id FROM $table_name LIMIT :limit";
+		$req_prep=Entity::$pdo->prepare($sql);
+		$values = array("limit" => $limit);
+		try {
+			$req_prep->execute($values);
+		} catch (PDOException $e) {
+			if (Conf::getDebug()) {
+			echo $e->getMessage();
+			} else {
+			echo 'Connection error';
+			}
+			die();
+			}
+		$req_prep->setFetchMode(PDO::FETCH_NUM);
+		return $req_prep->fetchAll();
+	}
+
     public static function select($primary_value){
         $table_name=static::$tableName;
         $class_name=ucfirst($table_name);
@@ -59,7 +77,7 @@ class Entity{
                        echo 'Connection error';
                 }
                 die();
-        }        
+        }
         $req_prep->setFetchMode(PDO::FETCH_CLASS, $class_name);
         $res = $req_prep->fetch();
         if (empty($res)){
@@ -67,8 +85,8 @@ class Entity{
         }
         return $res;
     }
-    
-    
+
+
     public static function selectFields($primary_value, $fields){
         $table_name=static::$tableName;
         $class_name=ucfirst($table_name);
@@ -77,12 +95,12 @@ class Entity{
         foreach ($fields as $field){
             $sql.= " $field,";
         }
-        
+
         $sql=rtrim($sql,",");
-        
-                  
+
+
         $sql.= " FROM $table_name WHERE $primary_key=:primary_v";
-         
+
         $req_prep=Entity::$pdo->prepare($sql);
         $values = array("primary_v" => $primary_value);
         try{
@@ -94,7 +112,7 @@ class Entity{
                        echo 'Connection error';
                 }
                 die();
-        }        
+        }
         $req_prep->setFetchMode(PDO::FETCH_CLASS, $class_name);
         $res = $req_prep->fetch();
         if (empty($res)){
@@ -102,8 +120,8 @@ class Entity{
         }
         return $res;
     }
-    
-    
+
+
 
 	public static function delete($primary_value){
 
@@ -147,12 +165,14 @@ class Entity{
 		} catch (PDOException $e) {
 			if (Conf::getDebug()) {
 				echo $e->getMessage();
+			}else{
+				echo "Connection error. ";
 			}
 			return false;
 		}
 		return true;
 	}
-        
+
 
 	public static function update($data){
 		$table_name=static::$tableName;
@@ -163,7 +183,7 @@ class Entity{
 		}
 		$sql=rtrim($sql,",");
 		$sql.=" WHERE $primary_key=:$primary_key";
-                
+
 		$req_prep= Entity::$pdo->prepare($sql);
 		try{
 			$req_prep->execute($data);
@@ -178,7 +198,7 @@ class Entity{
 		return true;
 	}
 
-        
+
         public static function getId($fieldName, $fieldValue){
         $table_name=static::$tableName;
         $sql = "SELECT id FROM $table_name WHERE $fieldName=:field_v";
@@ -193,7 +213,7 @@ class Entity{
                        echo 'Connection error';
                 }
                 die();
-        }        
+        }
         $req_prep->setFetchMode(PDO::FETCH_ASSOC);
         $res = $req_prep->fetch();
         if (empty($res)){
@@ -201,7 +221,7 @@ class Entity{
         }
         return $res;
     }
-        
+
 
 	//getter
 	public function get($attribut) {
@@ -217,10 +237,8 @@ class Entity{
 	 	}
 	}
 
-        
+
 
 }
 Entity::Init();
 ?>
-
-
