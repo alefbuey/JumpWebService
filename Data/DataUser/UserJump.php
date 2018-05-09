@@ -1,7 +1,7 @@
 <?php
 
-require_once '/var/www/html/JumpWebService/Config/conf.php';
-//require_once '/srv/http/JumpWebService/Config/conf.php';
+//require_once '/var/www/html/JumpWebService/Config/conf.php';
+require_once '/srv/http/JumpWebService/Config/conf.php';
 require_once Conf::getRootDir().'Data/Entity.php';
 
 class UserJump extends Entity
@@ -54,6 +54,32 @@ class UserJump extends Entity
     $nonce = hash('sha512', $message);
     return $nonce;
     }
+    
+    public function getPreferences($idUser){
+        $table_name= "Preferences";
+        $sql = "SELECT tj.name,tj.categoryid
+                from tagjump tj inner join (SELECT * FROM $table_name WHERE idUser =:idUser_v) itj
+                on tj.id = itj.idtag";
+                
+        $req_prep=Entity::$pdo->prepare($sql);
+        $values = array("idUser_v" => $idUser);
+
+        try{
+            $req_prep->execute($values);
+        } catch (PDOException $e) {
+                if (Conf::getDebug()) {
+                    echo $e->getMessage(); // show an error message
+                } else {
+                       echo 'Connection error';
+                }
+                die();
+        }        
+        $res = $req_prep->fetchAll(PDO::FETCH_ASSOC);
+        if (empty($res)){
+            return false;
+        }
+        return $res;
+    }            
     //verifyNonce($data,$cnonce,$hash){}
     
     ///constructeur

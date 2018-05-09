@@ -19,9 +19,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     //curl -v -H "Content-Type: application/json" -X POST -d '{"name":"Oscar","lastname":"Guarnizo","email":"oscar77@gmail.com","password":"o77","birthdate":"1996-04-21","gender":"M"}' http://localhost/JumpWebService/Logic/User/insertUser.php
 
     // Insertar usuario
-    $retorno = UserJump::save($data);
+    $userjump = UserJump::save($data);
         
-    if ($retorno) {
+    if ($userjump) {
         // Código de éxito
         print json_encode(
             array(

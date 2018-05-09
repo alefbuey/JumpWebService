@@ -2,22 +2,22 @@
 class Conf{
     
 
-//	static private $databases = array(
+	static private $databases = array(
+		'hostname' => 'localhost',
+		'database' => 'Jump',
+		'login' => 'postgres',
+		'password' => 'sasuke1996'
+	);
+        
+//        static private $databases = array(
 //		'hostname' => 'localhost',
 //		'database' => 'Jump',
 //		'login' => 'postgres',
 //		'password' => '1234'
 //	);
         
-        static private $databases = array(
-		'hostname' => 'localhost',
-		'database' => 'Jump',
-		'login' => 'postgres',
-		'password' => '1234'
-	);
-        
-        static private $rootDir = '/var/www/html/JumpWebService/';
-        //static private $rootDir = '/srv/http/JumpWebService/';
+//        static private $rootDir = '/var/www/html/JumpWebService/';
+        static private $rootDir = '/srv/http/JumpWebService/';
 
 	static private $debug = true;
 

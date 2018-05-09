@@ -4,12 +4,15 @@
 require_once '/srv/http/JumpWebService/Config/conf.php';
 require_once Conf::getRootDir().'Data/Entity.php';
 
-class NationalIdentifierType extends Entity
+class TagJump extends Entity
 {   
-    private static $id;   
+    private static $id;
+    private static $name;
     private static $description;
+    private static $category;
 
-    static protected $tableName ='NationalIdentifierType';
+
+    static protected $tableName ='TagJump';
     static protected $primaryKey='id';
     
     //getter
