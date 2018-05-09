@@ -20,9 +20,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     //    $body['typenationalidentifier'] = 1;  
     
     // Actualizar un usuario
-    $retorno = UserJump::update($data);
+    $userjump = UserJump::update($data);
 
-    if ($retorno) {
+    if ($userjump) {
         // Código de éxito
         print json_encode(
             array(

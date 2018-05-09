@@ -1,7 +1,7 @@
 <?php
 
-require_once '/var/www/html/JumpWebService/Config/conf.php';
-//require_once '/srv/http/JumpWebService/Config/conf.php';
+//require_once '/var/www/html/JumpWebService/Config/conf.php';
+require_once '/srv/http/JumpWebService/Config/conf.php';
 
 class Entity{
 	public static $pdo;
@@ -67,6 +67,7 @@ class Entity{
         $sql = "SELECT * FROM $table_name WHERE $primary_key=:primary_v";
         $req_prep=Entity::$pdo->prepare($sql);
         $values = array("primary_v" => $primary_value);
+
         try{
             $req_prep->execute($values);
         } catch (PDOException $e) {

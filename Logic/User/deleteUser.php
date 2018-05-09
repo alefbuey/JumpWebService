@@ -17,9 +17,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     //curl -v -H "Content-Type: application/json" -X POST -d '{"email":"oscar77@gmail.com"}' http://localhost/JumpWebService/Logic/User/deleteUser.php
     
     $idUser = UserJump::getId('email', $data['email']);
-    $retorno = UserJump::delete($idUser);
+    $userjump = UserJump::delete($idUser);
 
-    if ($retorno) {
+    if ($userjump) {
         print json_encode(
             array(
                 'estado' => '1',

@@ -10,6 +10,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     $dataJob = json_decode(file_get_contents('php://input'), true);
 
+
     $mode = $dataJob['mode'];
     $idMode = JobMode::getId('mode', $mode)['id'];
 
