@@ -1,6 +1,6 @@
 <?php
 class Conf{
-    
+
 
 //	static private $databases = array(
 //		'hostname' => 'localhost',
@@ -8,14 +8,14 @@ class Conf{
 //		'login' => 'postgres',
 //		'password' => '1234'
 //	);
-        
+
         static private $databases = array(
 		'hostname' => 'localhost',
 		'database' => 'Jump',
 		'login' => 'postgres',
 		'password' => '1234'
 	);
-        
+
         static private $rootDir = '/var/www/html/JumpWebService/';
         //static private $rootDir = '/srv/http/JumpWebService/';
 
@@ -25,7 +25,7 @@ class Conf{
 		return self::$debug;
 	}
 
-     
+
   /*
 	static public function getPostOrGet(){
 		if(self::$debug){
@@ -35,7 +35,7 @@ class Conf{
 		}
 	}
 	}
- * 
+ *
  * */
 	static public function getLogin() {
 		return self::$databases['login'];
