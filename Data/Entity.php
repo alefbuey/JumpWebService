@@ -66,7 +66,7 @@ class Entity{
         $sql = "SELECT * FROM $table_name WHERE $primary_key=:primary_v";
         $req_prep=Entity::$pdo->prepare($sql);
         $values = array("primary_v" => $primary_value);
-
+        echo $req_prep;
         try{
             $req_prep->execute($values);
         } catch (PDOException $e) {
