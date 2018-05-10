@@ -5,26 +5,18 @@
         <group>
             <file>file:/srv/http/JumpWebService/Logic/User/selectUser.php</file>
             <file>file:/srv/http/JumpWebService/Data/DataUser/UserJump.php</file>
-            <file>file:/srv/http/JumpWebService/Logic/User/insertUser.php</file>
-            <file>file:/srv/http/JumpWebService/Data/DataUser/UserState.php</file>
             <file>file:/srv/http/JumpWebService/Data/DataWork/JobState.php</file>
             <file>file:/srv/http/JumpWebService/Data/Entity.php</file>
             <file>file:/srv/http/JumpWebService/Logic/User/selectUserProfile.php</file>
-            <file>file:/srv/http/JumpWebService/Data/DataLocation/Location.php</file>
             <file>file:/srv/http/JumpWebService/Logic/Work/jobReadMultiple.php</file>
-            <file>file:/srv/http/JumpWebService/Logic/Work/jobUpdate.php</file>
             <file>file:/srv/http/JumpWebService/Data/DataUser/UserStaff.php</file>
             <file>file:/srv/http/JumpWebService/Data/DataWork/JobMode.php</file>
-            <file>file:/srv/http/JumpWebService/Logic/User/deleteUser.php</file>
             <file>file:/srv/http/JumpWebService/Logic/Work/jobCreate.php</file>
-            <file>file:/srv/http/JumpWebService/Logic/Work/jobRead.php</file>
             <file>file:/srv/http/JumpWebService/Logic/User/updateUser.php</file>
-            <file>file:/srv/http/JumpWebService/Data/DataTags/TagJump.php</file>
+            <file>file:/srv/http/JumpWebService/Logic/Work/jobMyJobs.php</file>
             <file>file:/srv/http/JumpWebService/Data/DataUser/NationalIdentifier.php</file>
             <file>file:/srv/http/JumpWebService/Data/DataTags/Category.php</file>
-            <file>file:/srv/http/JumpWebService/Logic/Work/jobModeRead.php</file>
             <file>file:/srv/http/JumpWebService/Data/DataWork/Job.php</file>
-            <file>file:/srv/http/JumpWebService/Logic/Work/jobDelete.php</file>
             <file>file:/srv/http/JumpWebService/Config/conf.php</file>
         </group>
     </open-files>
