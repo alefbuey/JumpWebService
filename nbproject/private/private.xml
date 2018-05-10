@@ -3,8 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/srv/http/JumpWebService/Logic/User/selectUser.php</file>
             <file>file:/srv/http/JumpWebService/Data/DataUser/UserJump.php</file>
             <file>file:/srv/http/JumpWebService/Logic/User/insertUser.php</file>
+            <file>file:/srv/http/JumpWebService/Data/DataUser/UserState.php</file>
             <file>file:/srv/http/JumpWebService/Data/DataWork/JobState.php</file>
             <file>file:/srv/http/JumpWebService/Data/Entity.php</file>
             <file>file:/srv/http/JumpWebService/Logic/User/selectUserProfile.php</file>
@@ -22,6 +24,7 @@
             <file>file:/srv/http/JumpWebService/Data/DataTags/Category.php</file>
             <file>file:/srv/http/JumpWebService/Logic/Work/jobModeRead.php</file>
             <file>file:/srv/http/JumpWebService/Data/DataWork/Job.php</file>
+            <file>file:/srv/http/JumpWebService/Logic/Work/jobDelete.php</file>
             <file>file:/srv/http/JumpWebService/Config/conf.php</file>
         </group>
     </open-files>

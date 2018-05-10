@@ -58,6 +58,29 @@ class Job extends Entity{
 			$this->$attribut=$valeur;
 	 	}
 	}
+        
+	public static function selectMyJobsWithLimit($idUser,$state,$limit){
+		$table_name="employeejob";
+		$sql="SELECT idJob FROM $table_name WHERE state=:v_state and idEmployee=:v_idemployee LIMIT :v_limit";
+		$req_prep=Entity::$pdo->prepare($sql);
+		$values = array(
+                    "v_limit" => $limit,
+                    "v_state" => $state,
+                    "v_idemployee" =>$idUser
+                            );
+		try {
+			$req_prep->execute($values);
+		} catch (PDOException $e) {
+			if (Conf::getDebug()) {
+			echo $e->getMessage();
+			} else {
+			echo 'Connection error';
+			}
+			die();
+			}
+		$req_prep->setFetchMode(PDO::FETCH_NUM);
+		return $req_prep->fetchAll();
+	}        
     
     
 }
