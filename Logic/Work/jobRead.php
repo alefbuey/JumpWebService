@@ -1,9 +1,11 @@
 <?php
-//require_once '/var/www/html/JumpWebService/Config/conf.php';
-require_once '/srv/http/JumpWebService/Config/conf.php';
+
+require_once '/var/www/html/JumpWebService/Config/conf.php';
+//require_once '/srv/http/JumpWebService/Config/conf.php';
 require_once Conf::getRootDir().'Data/DataWork/Job.php';
 require_once Conf::getRootDir().'Data/DataUser/UserJump.php';
 require_once Conf::getRootDir().'Data/DataUser/UserStaff.php';
+
 
 
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {

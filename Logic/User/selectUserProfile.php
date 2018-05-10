@@ -1,6 +1,6 @@
 <?php
-//require_once '/var/www/html/JumpWebService/Config/conf.php';
-require_once '/srv/http/JumpWebService/Config/conf.php';
+require_once '/var/www/html/JumpWebService/Config/conf.php';
+//require_once '/srv/http/JumpWebService/Config/conf.php';
 require Conf::getRootDir().'/Data/DataUser/UserJump.php';
 require Conf::getRootDir().'/Data/DataUser/UserStaff.php';
 require Conf::getRootDir().'/Data/DataUser/UserState.php';
@@ -8,16 +8,16 @@ require Conf::getRootDir().'/Data/DataUser/NationalIdentifier.php';
 require Conf::getRootDir().'/Data/DataLocation/Location.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-   
-//PAra hacerlo con POST    
+
+//PAra hacerlo con POST
 //    $post = json_decode(file_get_contents("php://input"), true);
 //    echo '<pre>',$post['email'],'</pre>';
 
-    if (isset($_GET['email'])) {     
+    if (isset($_GET['email'])) {
 
         // Obtener parametro email y password
         $email = $_GET['email'];
-        
+
         // Tratar retorno
         $idUser = UserJump::getId('email', $email);
         $userjump1 = UserJump::select($idUser['id']);
@@ -25,8 +25,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         $userState = UserState::selectFields($userjump1->get("idstate"), array("state"));
         $userNI = NationalIdentifierType::selectFields($userjump1->get("typenationalidentifier"), array("description"));
         $userLocation = Location::selectFields($userjump1->get("idlocation"), array("country","city"));
-        
-        //Designacion de las preferencias        
+
+        //Designacion de las preferencias
         $userTags = UserJump::getPreferences($idUser['id']);
         foreach ($userTags as $tag){
             $name = $tag['name'];
@@ -35,7 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         $preferences=rtrim($preferences,",");
         $userPreferences = array('preferences'=> $preferences);
 
-        
+
         $fields = array(
             "id",
             "email",
@@ -49,11 +49,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             "availableMoney",
             "rank"
             );
-        
+
         $userjump = UserJump::selectFields($idUser['id'],$fields);
 
         if ($userjump) {
-                
+
             $user["estado"] = "1";
             $user["user"] = $userjump;
             $user["userStaff"] = $userStaff;
@@ -61,8 +61,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             $user["userNIType"] = $userNI;
             $user["userLocation"] = $userLocation;
             $user["userPreferences"] = $userPreferences;
-            echo json_encode($user);  
-            
+            echo json_encode($user);
+
         } else {
             // Enviar respuesta de error general
             echo json_encode(
@@ -83,5 +83,3 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         );
     }
 }
-
-

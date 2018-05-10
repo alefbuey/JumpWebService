@@ -6,24 +6,26 @@ class Conf{
 		'hostname' => 'localhost',
 		'database' => 'Jump',
 		'login' => 'postgres',
-		'password' => 'sasuke1996'
+		'password' => '1234'
 	);
-        
+
 //        static private $databases = array(
 //		'hostname' => 'localhost',
 //		'database' => 'Jump',
 //		'login' => 'postgres',
 //		'password' => '1234'
 //	);
-        
-//        static private $rootDir = '/var/www/html/JumpWebService/';
-  static private $rootDir = '/srv/http/JumpWebService/';
 
+	static private $rootDir = '/var/www/html/JumpWebService/';
+  //static private $rootDir = '/srv/http/JumpWebService/';
+
+	static private $user = 'f';
 	static private $debug = true;
 
 	static public function getDebug() {
 		return self::$debug;
 	}
+
 
 
   /*
@@ -49,7 +51,7 @@ class Conf{
 	static public function getPassword() {
 		return self::$databases['password'];
         }
-        static public function getRootDir() {
+  static public function getRootDir() {
 		return self::$rootDir;
-        }
+  }
 }

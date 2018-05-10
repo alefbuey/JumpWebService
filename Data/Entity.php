@@ -1,7 +1,6 @@
 <?php
-
-//require_once '/var/www/html/JumpWebService/Config/conf.php';
-require_once '/srv/http/JumpWebService/Config/conf.php';
+require_once '/var/www/html/JumpWebService/Config/conf.php';
+//require_once '/srv/http/JumpWebService/Config/conf.php';
 
 class Entity{
 	public static $pdo;
@@ -43,7 +42,7 @@ class Entity{
 
 	public static function selectWithLimit($limit){
 		$table_name=static::$tableName;
-		$sql="SELECT id FROM $table_name LIMIT :limit";
+		$sql="SELECT id FROM $table_name ORDER BY datePosted DESC LIMIT :limit";
 		$req_prep=Entity::$pdo->prepare($sql);
 		$values = array("limit" => $limit);
 		try {
