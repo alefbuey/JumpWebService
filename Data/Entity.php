@@ -60,15 +60,19 @@ class Entity{
 	}
 
     public static function select($primary_value){
+        
         $table_name=static::$tableName;
         $class_name=ucfirst($table_name);
         $primary_key=static::$primaryKey;
+       
         $sql = "SELECT * FROM $table_name WHERE $primary_key=:primary_v";
         $req_prep=Entity::$pdo->prepare($sql);
+    
         $values = array("primary_v" => $primary_value);
-        echo $req_prep;
+       
         try{
             $req_prep->execute($values);
+            
         } catch (PDOException $e) {
                 if (Conf::getDebug()) {
                     echo $e->getMessage(); // show an error message
@@ -83,6 +87,7 @@ class Entity{
             return false;
         }
         return $res;
+        
     }
 
 

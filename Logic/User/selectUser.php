@@ -17,9 +17,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
         // Tratar retorno
         $idUser = UserJump::getId('email', $email);
+      //  echo print_r($idUser);
         $userjump = UserJump::selectFields($idUser['id'],array("id","name","lastname","email","password"));
 
+
         if ($userjump) {
+        //  echo "Hola";
 
                 if($userjump->checkPassword($email,$password)){
                     $user["estado"] = "1";
