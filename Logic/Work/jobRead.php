@@ -7,10 +7,10 @@ require_once Conf::getRootDir().'Data/DataUser/UserJump.php';
 require_once Conf::getRootDir().'Data/DataUser/UserStaff.php';
 
 
-
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
     $idJob = $_GET['id'];
+
 
 
     $job = Job::select($idJob);
