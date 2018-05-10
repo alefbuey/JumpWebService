@@ -17,22 +17,23 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
         // Tratar retorno
         $idUser = UserJump::getId('email', $email);
-      //  echo print_r($idUser);
-        $userjump = UserJump::selectFields($idUser['id'],array("id","name","lastname","email","password"));
+        $userjump = UserJump::select($idUser['id']);
 
 
         if ($userjump) {
-        //  echo "Hola";
 
                 if($userjump->checkPassword($email,$password)){
-                    $user["estado"] = "1";
-                    $user["user"] = $userjump;
-                    echo json_encode($user);
+                    echo json_encode(
+                        array(
+                            'estado' => '1',
+                            'mensaje' => 'Contraseña Correcta   '
+                        )
+                    );
                 } else {
                     echo json_encode(
                         array(
                             'estado' => '2',
-                            'mensaje' => 'Incorrect Password'
+                            'mensaje' => 'Contraseña Incorrecta'
                         )
                     );
                 }
@@ -42,7 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             echo json_encode(
                 array(
                     'estado' => '3',
-                    'mensaje' => 'No Information Account'
+                    'mensaje' => 'No se obtuvo el registro'
                 )
             );
         }

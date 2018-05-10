@@ -1,5 +1,4 @@
 <?php
-
 //require_once '/var/www/html/JumpWebService/Config/conf.php';
 require_once '/srv/http/JumpWebService/Config/conf.php';
 
@@ -43,7 +42,7 @@ class Entity{
 
 	public static function selectWithLimit($limit){
 		$table_name=static::$tableName;
-		$sql="SELECT id FROM $table_name LIMIT :limit";
+		$sql="SELECT id FROM $table_name ORDER BY datePosted DESC LIMIT :limit";
 		$req_prep=Entity::$pdo->prepare($sql);
 		$values = array("limit" => $limit);
 		try {
@@ -61,14 +60,19 @@ class Entity{
 	}
 
     public static function select($primary_value){
+        
         $table_name=static::$tableName;
         $class_name=ucfirst($table_name);
         $primary_key=static::$primaryKey;
+       
         $sql = "SELECT * FROM $table_name WHERE $primary_key=:primary_v";
         $req_prep=Entity::$pdo->prepare($sql);
+    
         $values = array("primary_v" => $primary_value);
+
         try{
             $req_prep->execute($values);
+            
         } catch (PDOException $e) {
                 if (Conf::getDebug()) {
                     echo $e->getMessage(); // show an error message
@@ -83,6 +87,7 @@ class Entity{
             return false;
         }
         return $res;
+        
     }
 
 

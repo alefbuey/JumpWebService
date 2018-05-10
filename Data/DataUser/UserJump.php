@@ -1,11 +1,11 @@
 <?php
 
-//require_once '/var/www/html/JumpWebService/Config/conf.php';
-require_once '/srv/http/JumpWebService/Config/conf.php';
+require_once '/var/www/html/JumpWebService/Config/conf.php';
+//require_once '/srv/http/JumpWebService/Config/conf.php';
 require_once Conf::getRootDir().'Data/Entity.php';
 
 class UserJump extends Entity
-{   
+{
 
     private static $id;
     private static $email;
@@ -26,7 +26,7 @@ class UserJump extends Entity
 
     static protected $tableName ='UserJump';
     static protected $primaryKey='id';
-    
+
         //getter
     public function get($attribut) {
             if (property_exists($this, $attribut)) {
@@ -40,27 +40,27 @@ class UserJump extends Entity
                             $this->$attribut=$valeur;
              }
     }
-    
+
     public function checkPassword($email,$password){
-        
+
             if(!$this==false && ($this->email)==$email && ($this->password)==$password){
                     return true;
             }else{
                     return false;
             }
     }
-    
-    public function getNonce($message){        
+
+    public function getNonce($message){
     $nonce = hash('sha512', $message);
     return $nonce;
     }
-    
+
     public function getPreferences($idUser){
         $table_name= "Preferences";
         $sql = "SELECT tj.name,tj.categoryid
                 from tagjump tj inner join (SELECT * FROM $table_name WHERE idUser =:idUser_v) itj
                 on tj.id = itj.idtag";
-                
+
         $req_prep=Entity::$pdo->prepare($sql);
         $values = array("idUser_v" => $idUser);
 
@@ -73,15 +73,15 @@ class UserJump extends Entity
                        echo 'Connection error';
                 }
                 die();
-        }        
+        }
         $res = $req_prep->fetchAll(PDO::FETCH_ASSOC);
         if (empty($res)){
             return false;
         }
         return $res;
-    }            
+    }
     //verifyNonce($data,$cnonce,$hash){}
-    
+
     ///constructeur
 //    public function __construct($email=NULL, $idprofession=NULL, $name=NULL, $lastname=NULL, $passord=NULL, $birthdate=NULL, $nonce=NULL){
 //            if (!is_null($email) && !is_null($idprofession) && !is_null($name) && !is_null($lastname) && !is_null($password) && !is_null($birthdate) &&!is_null($nonce)){
@@ -94,7 +94,7 @@ class UserJump extends Entity
 //                            $this->nonce=$nonce;
 //            }
 //    }
-    
+
 //        public function __set($name, $value) {
 //            ;
 //        }

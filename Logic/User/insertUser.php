@@ -1,20 +1,17 @@
 <?php
+require_once '/var/www/html/JumpWebService/Config/conf.php';
 
-require_once '/srv/http/JumpWebService/Config/conf.php';
+//require_once '/srv/http/JumpWebService/Config/conf.php';
 require Conf::getRootDir().'/Data/DataUser/UserJump.php';
 require Conf::getRootDir().'/Data/DataUser/UserStaff.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-
     // Decodificando formato Json
     $data = json_decode(file_get_contents("php://input"), true);
-
     //Datos que voy a recibir desde el app
     //name, lastname, birthdate, gender, email, password
     //el resto configurar a null en la base de datos
-
     $dataUser = $data['user'];
-
     $dataUser['nonce'] = UserJump::getnonce($dataUser['email']);
     $dataStaff = $data['userStaff'];
     $userjump = UserJump::save($dataUser);
@@ -35,5 +32,3 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         echo 'Failed Creation';
     }
 }
-
-

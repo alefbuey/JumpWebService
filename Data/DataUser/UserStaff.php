@@ -1,13 +1,13 @@
 <?php
 
 
-//require_once '/var/www/html/JumpWebService/Config/conf.php';
-require_once '/srv/http/JumpWebService/Config/conf.php';
+require_once '/var/www/html/JumpWebService/Config/conf.php';
+//require_once '/srv/http/JumpWebService/Config/conf.php';
 
 require_once Conf::getRootDir().'Data/Entity.php';
 
 class UserStaff extends Entity
-{   
+{
 
     private static $idUser;
     private static $about;
@@ -17,7 +17,7 @@ class UserStaff extends Entity
 
     static protected $tableName ='UserStaff';
     static protected $primaryKey='idUser';
-    
+
 
     //getter
     public function get($attribut) {
@@ -33,9 +33,8 @@ class UserStaff extends Entity
              }
 
     }
-    
+
 }
 
 
 ?>
-
