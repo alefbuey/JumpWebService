@@ -9,7 +9,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     $limit = $_GET['limit'];
 
     $idArray = Job::selectWithLimit($limit);
-
     echo json_encode($idArray);
 
 }
