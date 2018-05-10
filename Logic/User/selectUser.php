@@ -39,7 +39,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             echo json_encode(
                 array(
                     'estado' => '3',
-                    'mensaje' => 'Not obtain register'
+                    'mensaje' => 'No Information Account'
                 )
             );
         }
