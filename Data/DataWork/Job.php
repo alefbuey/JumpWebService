@@ -178,6 +178,31 @@ class Job extends Entity{
                 return false;
         }
         return true;;
-    }        
+    }
+    
+        public static function checkFavorite($idUser,$idJob){
+        $table_name="FavoriteJobs";                
+        $sql="SELECT * FROM $table_name WHERE idEmployee=:v_idemployee and idJob=:v_idjob;";
+        $req_prep=Entity::$pdo->prepare($sql);
+        $values = array(
+            "v_idemployee" =>$idUser,
+            "v_idjob" => $idJob
+                    );
+        try{
+                $req_prep->execute($values);
+        }catch (PDOException $e) {
+                if (Conf::getDebug()) {
+                        echo $e->getMessage();
+                }else{
+                        echo "Connection error. ";
+                }
+        }
+        $res = $req_prep->fetch();
+        if(isset($res["idjob"])){
+            return true;            
+        }else{
+            return false;
+        }
+    } 
 
 }
