@@ -2,17 +2,14 @@
 require_once '/var/www/html/JumpWebService/Config/conf.php';
 //require_once '/srv/http/JumpWebService/Config/conf.php';
 require_once Conf::getRootDir().'Data/Entity.php';
-class JobState extends Entity{
-
-    private static $id;
-    private static $jobState;
-
-
-    static protected $tableName = 'jobState';
-    static protected $primaryKey = 'id';
-
-
-
+class EmployeeJob extends Entity{
+   
+       
+    static protected $tableName = 'EmployeeJob';
+    static protected $primaryKey = array(1=>'idEmployee', 2 => "idJob");
+    
+    
+    
 
 //getter
 	public function get($attribut) {
@@ -27,5 +24,8 @@ class JobState extends Entity{
 			$this->$attribut=$valeur;
 	 	}
 	}
-
+        
+        
+     
+    
 }
