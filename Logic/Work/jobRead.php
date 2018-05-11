@@ -15,7 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
     $job = Job::select($idJob);
 
-    $user = UserJump::selectFields($job->get('idemployer'), array("id", "name", "lastname"));
+    $user = UserJump::selectFields($job->get('idemployer'), array("id", "name", "lastname","email"));
 
 
   //  $userStaff = UserStaff::selectFields($job->get('idemployer'),array("photopath"));
