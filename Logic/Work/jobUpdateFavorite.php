@@ -1,15 +1,16 @@
 <?php
 
- //require_once '/var/www/html/JumpWebService/Config/conf.php';
+//require_once '/var/www/html/JumpWebService/Config/conf.php';
 require_once '/srv/http/JumpWebService/Config/conf.php'; 
 require_once Conf::getRootDir().'Data/DataWork/Job.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
-    $idUser = $_GET['idUser'];
-    $idJob = $_GET['idJob'];
-    $action = $_GET['action']; //1->insert 2->delete
+
     if(isset($_GET['idUser']) and isset($_GET['idJob']) and isset($_GET['action'])){
+        $idUser = $_GET['idUser'];
+        $idJob = $_GET['idJob'];
+        $action = $_GET['action']; //1->insert 2->delete
         $idArray = Job::changeStateOfFavorite($idUser, $idJob, $action);
         if($idArray){
             if($action == 1){
