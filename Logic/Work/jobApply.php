@@ -1,7 +1,7 @@
 <?php
 require_once '/var/www/html/JumpWebService/Config/conf.php';
 //require_once '/srv/http/JumpWebService/Config/conf.php';
-require_once Conf::getRootDir().'Data/DataWork/EmployeeJob.php';
+require_once Conf::getRootDir().'Data/DataUser/EmployeeJob.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
@@ -12,4 +12,4 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         echo "Error in application process";
     }
 
-}  
+}
