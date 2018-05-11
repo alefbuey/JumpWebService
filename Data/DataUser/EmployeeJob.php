@@ -23,12 +23,12 @@ class EmployeeJob extends Entity
                             $this->$attribut=$valeur;
              }
     }
-    
-   
+
+
 
     public function selectApplicantInfo($idUser,$idJob){
 
-         
+
             $table_name="employeejob";
             $sql="SELECT salary, counteroffer, postedreason, counterofferreason FROM $table_name WHERE idemployee=:v_idemployee and idjob=:v_idjob";
             $req_prep=Entity::$pdo->prepare($sql);
@@ -47,7 +47,7 @@ class EmployeeJob extends Entity
             return $req_prep->fetch();
 
         }
-        
+
         public function selectApplicants($idJob) {
             $table_name="employeejob";
             $sql="SELECT idemployee FROM $table_name WHERE idjob=:v_idjob and state = 1";
@@ -66,8 +66,27 @@ class EmployeeJob extends Entity
             $req_prep->setFetchMode(PDO::FETCH_NUM);
             return $req_prep->fetchAll();
 
-        
+
         }
-        
+
+
+
+        public function updateEmployeeState($data){
+          $table_name=static::$tableName;
+          $sql= "UPDATE $table_name SET state =:state WHERE idemployee =:idemployee AND idjob =:idjob";
+          $req_prep= Entity::$pdo->prepare($sql);
+          try{
+            $req_prep->execute($data);
+          } catch (PDOException $e) {
+            if (Conf::getDebug()) {
+              echo $e->getMessage(); // affiche un message d'erreur
+            } else {
+              echo 'Connection error';
+            }
+            return false;
+          }
+          return true;
+        }
+
 }
 ?>
